@@ -1,0 +1,56 @@
+#跨进程的SharedPreferences
+解决android中的SharedPreferences不能跨进程读写的问题.
+
+
+## 用法
+
+* Android Studio
+
+	选择添加:
+
+	```
+	compile project(':interprocesssharedpreferences')
+	```
+	
+	在AndroidManifest.xml注册provider
+    ```
+    <!--authorities 规则：应用的包名 + ".InterProcessContentProvider"-->
+    <provider
+        android:name="jone.common.android.data.sharedPreferences.InterProcessContentProvider"
+        android:authorities="jone.common.android.data.sharedPreferences.sample.InterProcessContentProvider"
+        android:enabled="true"
+        android:exported="true" />
+    ```
+* Eclipse
+	
+	自行copy源码。
+	
+##用法示例
+
+### 普通读写
+
+```java
+InterProcessSharedPreferences interProcessSharedPreferences = InterProcessSharedPreferences.getInstance(getApplication());
+interProcessSharedPreferences.putString("testStr", edit_value.getText().toString()); //写入
+interProcessSharedPreferences.getString("testStr", "empty"); //读取
+interProcessSharedPreferences.remove("testStr"); //删除
+```
+
+### 监听
+
+```java
+ InterProcessSharedPreferences interProcessSharedPreferences = InterProcessSharedPreferences.getInstance(getApplication());
+ 
+ ISharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = new ISharedPreferences.OnSharedPreferenceChangeListener() {
+         @Override
+         public void onSharedPreferenceChanged(ISharedPreferences sharedPreferences, String key) {
+             Log.e(TAG, "interProcessSharedPreferences--onSharedPreferenceChanged>>key: " + key + " value: " + sharedPreferences.getString(key, "empty"));
+         }
+     };
+     
+ //监听(onCreate)
+ interProcessSharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener); 
+ 
+ //取消监听(onDestroy 不需要监听时一定要取消监听)
+ interProcessSharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+```
