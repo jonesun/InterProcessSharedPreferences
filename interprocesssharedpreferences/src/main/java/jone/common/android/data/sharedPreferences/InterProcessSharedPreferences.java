@@ -14,8 +14,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 跨进程的SharedPreferences
- * 需在AndroidManifest注册ContentProvider {@link InterProcessContentProvider}
+ *
+ * must register in AndroidManifest.xml for contentProvider {@link InterProcessContentProvider}
  * Created by jone.sun on 2016/2/17.
  */
 public class InterProcessSharedPreferences extends ISharedPreferences {
@@ -36,7 +36,6 @@ public class InterProcessSharedPreferences extends ISharedPreferences {
             super.onChange(selfChange, uri);
             //Log.e(TAG, "onChange: " + selfChange + " " + uri);
             setChanged();
-            //只有在setChange()被调用后，notifyObservers()才会去调用update()，否则什么都不干。
             notifyObservers(uri.getPath().replace("/sp/", ""));
         }
     };

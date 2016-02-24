@@ -11,7 +11,14 @@
 	```
 	compile project(':interprocesssharedpreferences')
 	```
-	
+	或者
+    	
+    ```
+    compile 'jone.common.android.data.sharedPreferences:interprocesssharedpreferences:1.0.0'
+    
+    如果获取不到，则加入 maven { url 'http://dl.bintray.com/sunjoner7/maven' }
+    ```
+    
 	在AndroidManifest.xml注册provider
     ```
     <!--authorities 规则：应用的包名 + ".InterProcessContentProvider"-->

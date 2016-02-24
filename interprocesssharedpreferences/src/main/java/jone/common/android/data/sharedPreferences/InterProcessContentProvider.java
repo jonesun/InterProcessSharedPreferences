@@ -16,11 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 /***
- * <provider
+ * provider
  * android:name="jone.common.android.data.sharedPreferences.InterProcessContentProvider"
- * android:authorities="jone.common.app.InterProcessContentProvider" //对应 {应用的包名 + ".InterProcessContentProvider"}
+ * android:authorities="jone.common.app.InterProcessContentProvider" // {packageName + ".InterProcessContentProvider"}
  * android:enabled="true"
- * android:exported="true" />
+ * android:exported="true"
  */
 public class InterProcessContentProvider extends ContentProvider {
     private static final String TAG = InterProcessContentProvider.class.getSimpleName();

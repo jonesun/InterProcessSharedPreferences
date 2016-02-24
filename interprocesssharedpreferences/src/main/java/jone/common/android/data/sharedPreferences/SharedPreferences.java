@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * SharedPreferences 简化android库的操作
+ * SharedPreferences
  * Created by jone.sun on 2016/2/17.
  */
 public class SharedPreferences extends ISharedPreferences {
@@ -18,7 +18,6 @@ public class SharedPreferences extends ISharedPreferences {
         @Override
         public void onSharedPreferenceChanged(android.content.SharedPreferences sharedPreferences, String key) {
             setChanged();
-            //只有在setChange()被调用后，notifyObservers()才会去调用update()，否则什么都不干。
             notifyObservers(key);
         }
     };
